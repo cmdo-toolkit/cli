@@ -1,0 +1,17 @@
+# General
+
+node_modules
+src
+
+# Formatting
+
+.eslintignore
+.eslintrc
+.prettierrc
+
+# TypeScript
+
+custom.d.ts
+tsconfig.json
+tsconfig-esm.json
+tsconfig.tsbuildinfo

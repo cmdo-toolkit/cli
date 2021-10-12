@@ -1,0 +1,54 @@
+import fs from "fs";
+
+/*
+ |--------------------------------------------------------------------------------
+ | Exports
+ |--------------------------------------------------------------------------------
+ */
+
+//#region
+
+export async function getActions(path: string, root: string, events: Record<string, unknown> = {}) {
+  const dir = await fs.promises.opendir(path);
+  for await (const dirent of dir) {
+    if (dirent.isFile() && path.includes("Actions")) {
+      events[lower(dirent.name.replace(".ts", ""))] = `${path}/${dirent.name}`.replace(root, ".").replace(".ts", ".js");
+    }
+    if (dirent.isDirectory()) {
+      await getActions(`${path}/${dirent.name}`, root, events);
+    }
+  }
+  return events;
+}
+
+export function getActionsImports(list: any) {
+  const imports: string[] = [];
+  for (const [action, path] of getSortedPaths(list)) {
+    imports.push(`export { ${action} } from "${path}";`);
+  }
+  return imports.join("\n");
+}
+
+//#endregion
+
+/*
+ |--------------------------------------------------------------------------------
+ | Utilities
+ |--------------------------------------------------------------------------------
+ */
+
+//#region
+
+function getSortedPaths(map: any) {
+  const paths = [];
+  for (const event in map) {
+    paths.push([event, map[event]]);
+  }
+  return paths.sort((a, b) => (a[1] > b[1] ? 1 : -1));
+}
+
+function lower(str: string): string {
+  return str.charAt(0).toLocaleLowerCase() + str.slice(1);
+}
+
+//#endregion

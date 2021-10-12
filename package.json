@@ -1,0 +1,42 @@
+{
+  "name": "cmdo-cli",
+  "version": "0.2.5",
+  "description": "Command line interface for the CMDO framework projects.",
+  "homepage": "https://github.com/cmdo/toolkit/cli",
+  "repository": "https://github.com/cmdo/toolkit",
+  "bin": {
+    "cmdo": "./lib/index.js"
+  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "scripts": {
+    "prepublishOnly": "npm run lint && npm run build",
+    "local": "npm uninstall -g && npm run build && npm i -g",
+    "build": "rm -rf ./dist && ./node_modules/.bin/tsc && node ./esm-fix.js",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "change-case": "^4.1.2",
+    "commander": "8.2.0",
+    "glob": "^7.2.0",
+    "inquirer": "^8.1.5",
+    "notation": "^2.0.0",
+    "terminal-table": "0.0.12"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/inquirer": "^8.1.3",
+    "@types/jest": "27.0.2",
+    "@types/node": "^16.10.2",
+    "@typescript-eslint/eslint-plugin": "4.33.0",
+    "@typescript-eslint/parser": "4.33.0",
+    "cmdo-cli": "0.2.5",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "ts-jest": "27.0.5",
+    "typescript": "4.4.3"
+  }
+}

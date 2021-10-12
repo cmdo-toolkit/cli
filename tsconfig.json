@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+
+    "allowSyntheticDefaultImports": true,
+    "useUnknownInCatchVariables": false,
+
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "lib": ["ES2020"],
+    
+    "declaration": true,
+
+    "outDir": "lib"
+  },
+  "exclude": ["node_modules"],
+  "include": ["custom.d.ts", "src"]
+}
